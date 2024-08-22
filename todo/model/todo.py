@@ -14,7 +14,7 @@ class Todo:
             self.tags.append(tag)
     
     def __str__(self) -> str:
-        return {self.code_id} - {self.title}
+        return f"{self.code_id} - {self.title}"
     
 class TodoBook:
     def __init__(self) -> None:
@@ -33,5 +33,17 @@ class TodoBook:
         pending_list:list[Todo] = [todo for todo in self.todos.values() if not todo.completed]
         return pending_list
     
+    def completed_todos(self) ->list[Todo]:
+        completed_list:list[Todo] = [todo for todo in self.todos.values() if todo.completed]
+        return completed_list
     
+    def tags_todo_count(self) -> dict[str,int]:
+        tags_count:dict[str,int] = {}
         
+        for todos in self.todos.values():
+            for tag in todos.tags:
+                if  tag in tags_count:
+                    tags_count[tag] += 1
+                else:
+                    tags_count[tag] = 1
+        return tags_count
