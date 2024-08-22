@@ -1,5 +1,5 @@
 class Todo:
-    def __init__(self,code_id:int,title:str,description:str,) -> None:
+    def __init__(self,code_id:int,title:str,description:str) -> None:
         self.code_id:int = code_id
         self.title:str = title
         self.description:str = description
@@ -17,15 +17,21 @@ class Todo:
         return {self.code_id} - {self.title}
     
 class TodoBook:
-    def __init__(self, todos:dict) -> None:
-        self.todos: dict(int,Todo) = {}
+    def __init__(self) -> None:
+        self.todos: dict[int, Todo] = {}
     
     def add_todo(self,title:str,description:str) ->int:
         code_id = len(self.todos) + 1
-        code_id= Todo(code_id:int, title:str, description:str)
-        todos = {code_id:Todo}
+        
+        add_todo= Todo(code_id, title, description)
+        
+        self.todos[code_id] = add_todo
+        
         return code_id
 
-    def pending_todos(self) -> list:Todo
-    return [todo for todo in self.todos.values() if not todo.completed]
+    def pending_todos(self) -> list[Todo]:
+        pending_list:list[Todo] = [todo for todo in self.todos.values() if not todo.completed]
+        return pending_list
+    
+    
         
